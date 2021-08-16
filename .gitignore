@@ -2,3 +2,5 @@ __pycache__/
 figures/
 .ipynb_checkpoints/
 .DS_Store
+.gitattributes
+array_joblibs/CV_dict_list.joblib

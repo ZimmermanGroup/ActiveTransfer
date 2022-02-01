@@ -95,13 +95,13 @@ def plot_component_portions(source_portion, batch1_portion, batch2_portion, batc
 
     fig, ax = plt.subplots()
     rects1 = ax.bar(x - width*3/2, source_portion, width,
-                    label='Source', color="#440154")
+                    label='Source', color="#440154") #
     rects2 = ax.bar(x - width/2, batch1_portion, width,
-                    label='Iter 1', color="#39568C")
+                    label='Iter 1', color='#bad6eb') #"#39568C"
     rects3 = ax.bar(x + width/2, batch2_portion, width,
-                    label="Iter 2", color="#1F968B")
+                    label="Iter 2", color='#89bedc') #"#1F968B"
     rects4 = ax.bar(x + width*3/2, batch3_portion, width,
-                    label="Iter 3", color="#95D840")
+                    label="Iter 3", color='#539ecd') #"#95D840"
 
     # Add some text for labels, title and custom x-axis tick labels, etc.
     ax.set_yticks([0.2*x for x in range(6)])
@@ -165,28 +165,33 @@ def plot_conducted_rxns_by_pca(list_of_selected_rxns_per_batch,
                 sel_idx.append(ind)
                 marker = marker_dict[rxns_y[j]]
                 ax.scatter(x=target_pca[ind, 0], y=target_pca[ind, 1],
-                           c=color_list[i], marker=marker, alpha=1)
+                           c=color_list[i], marker=marker, alpha=1, s=60)
     unsel_idx = [x for x in range(target_pca.shape[0]) if x not in sel_idx]
     ax.scatter(x=target_pca[unsel_idx, 0],
-               y=target_pca[unsel_idx, 1], c='grey', alpha=0.6)
+               y=target_pca[unsel_idx, 1], c='grey', s=30, alpha=0.4)
 
     # Adding Marker Legend First
     marker_legend_elements = [
         Line2D([0], [0], markerfacecolor="grey", marker='o',
-               color="w", label="Unlabeled", markersize=10, alpha=0.6),
-        Line2D([0], [0], markerfacecolor=color_list[0], marker='*',
-               color="w", label="Positive", markersize=15),
-        Line2D([0], [0], markeredgecolor=color_list[0], marker='x',
-               color="none", label="Negative", markersize=10),
+               color="w", label="Unlabeled", markersize=10, alpha=0.4),
     ]
+    if marker_dict[0] == "*" :
+        marker_legend_elements += [Line2D([0], [0], markerfacecolor=color_list[0], marker=marker_dict[0], color="w", label="Positive", markersize=10)]
+    elif marker_dict[0] == "+":
+        marker_legend_elements += [Line2D([0], [0], markeredgecolor=color_list[0], marker=marker_dict[0],
+                color="none", label="Positive", markersize=10)]
+    if marker_dict[1] == "_" :
+        marker_legend_elements += [Line2D([0], [0], color=color_list[0], linewidth=1.5, label="Negative")]
+    else :
+        marker_legend_elements += [Line2D([0], [0], markeredgecolor=color_list[0], marker=marker_dict[1],
+               color="none", label="Negative", markersize=10)]
     marker_legend = ax.legend(handles=marker_legend_elements,
                               bbox_to_anchor=(1, 1), title="Reaction Label")
     plt.gca().add_artist(marker_legend)
     # Then add Batch Legend
     order_list = ["1st", "2nd", "3rd", "4th", "5th"]
     legend_elements = [
-        Line2D([0], [0], markerfacecolor=color_list[x], marker='*',
-               color="w", label=order_list[x], markersize=15)
+        Line2D([0], [0], color=color_list[x], label=order_list[x], markersize=30)
         for x in range(len(color_list))
     ]
     ax.legend(handles=legend_elements,

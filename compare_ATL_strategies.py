@@ -12,7 +12,8 @@ def compare_ATL_strategies(
     target_desc, target_id, target_y,
     num_rxns_per_batch=3, new_max_depth=1,
     num_trees_to_add=3, target_weight_in_combined=5,
-    print_progress=False):
+    print_progress=False, strategies=["Passive","Combined Data", "Add 3 Trees", "No Source"]
+):
     """ Compares the performances of the following ATL strategies.
     • Target tree growth  • Re-train on combined data  • Passive modeling (no source model update)
     • No source (modeling only based on target data)
@@ -55,8 +56,7 @@ def compare_ATL_strategies(
             }})
         
         for j, model in enumerate(model_list):
-            for strategy in ["Passive","Combined Data", 
-                            "Add 3 Trees", "No Source"]: # "No Source - 5 Trees", 
+            for strategy in strategies: # "No Source - 5 Trees", 
                 if strategy in ["Passive", "Add 3 Trees", "Combined Data"]:
                     #print(f"    Add {num_trees} trees, random_state={42+k}")
                     model_to_use = copy.deepcopy(model)

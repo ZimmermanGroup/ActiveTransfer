@@ -40,4 +40,4 @@ Lists the version used of core libraries used in this work.
 
 ## Citing
 If you find the code within this repo useful, please consider citing :  
-`Shim, E.; Kammeraad, J. A.; Xu, Z.; Tewari, A.; Cernak, T.; Zimmerman, P. M. Predicting Reaction Conditions from Limited Data through Active Transfer Learning, [Journal Name], Year, Issue, Pages`
+`Shim, E.; Kammeraad, J. A.; Xu, Z.; Tewari, A.; Cernak, T.; Zimmerman, P. M. Predicting Reaction Conditions from Limited Data through Active Transfer Learning, Chem. Sci. 2022, 13, 6655-6668`
